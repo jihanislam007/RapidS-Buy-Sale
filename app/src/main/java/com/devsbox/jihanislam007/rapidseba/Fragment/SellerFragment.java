@@ -45,14 +45,14 @@ public class SellerFragment extends Fragment {
         DoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                /*String strtext = getArguments().getString("Username","There is no Data");
-                Toast.makeText(getActivity(), "Hi "+ strtext, Toast.LENGTH_SHORT).show();*/
+
+                String strtext = getArguments().getString("Username","There is no Data");
+                Toast.makeText(getActivity(), "Hi "+ strtext, Toast.LENGTH_SHORT).show();
 
                 String LandAddress = AddressEditText.getText().toString();
                 String LandRate = RateEditText.getText().toString()+" Tk";
                 String LandKatha = kathaEditText.getText().toString();
                 String LandSqf = SquarefootEditText.getText().toString();
-
 
 
                 //////////////////get data from previous fragment.////////////////
@@ -92,6 +92,20 @@ public class SellerFragment extends Fragment {
                         smsIntent.putExtra("sms_body", "Nmae :"+Username+"\nPhone :"+Userphone+
                                 "\nMy Address :"+Useraddress+"\nLand Address :"+LandAddress+"\nExpected Rate :"+
                                 LandRate+"\nLand Size :"+Katha+LandSqf);
+                        startActivity(smsIntent);
+
+                        Toast.makeText(getActivity(), "Your Message is ready to send", Toast.LENGTH_LONG).show();
+                        //   finish();
+                    }else {
+
+
+                        String Phone = "+8801711425005";
+                        Intent smsIntent = new Intent(Intent.ACTION_SENDTO);
+                        smsIntent.setData(Uri.parse("smsto:" + Uri.encode(Phone)));
+
+                        smsIntent.putExtra("sms_body", "Nmae :"+Username+"\nPhone :"+Userphone+
+                                "\nMy Address :"+Useraddress+"\nLand Address :"+LandAddress+"\nExpected Rate :"+
+                                LandRate+"\nLand Size :"+LandKatha+"\n"+LandSqf);
                         startActivity(smsIntent);
 
                         Toast.makeText(getActivity(), "Your Message is ready to send", Toast.LENGTH_LONG).show();
